@@ -1,0 +1,21 @@
+{
+  "name": "store-x",
+  "version": "1.0.0",
+  "description": "Universal Flux Stores",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/**/*.js"
+  },
+  "author": "JC Ivancevich <jc.ivancevich@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "contra": "^1.9.1",
+    "lodash": "^3.10.0"
+  },
+  "devDependencies": {
+    "axios": "^0.5.4",
+    "babel": "^5.8.3",
+    "nock": "^2.9.1",
+    "tape": "^4.0.1"
+  }
+}
