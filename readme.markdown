@@ -2,9 +2,23 @@
 
 > Universal Flux Stores
 
-Simple yet powerful [Flux](http://facebook.github.io/flux/) store + dispatcher implementation. It's meant to work with any JS framework or library, and on the server as well.
+Simple yet powerful [Flux](http://facebook.github.io/flux/) stores implementation. It's meant to work with any JS framework or library, and on the server as well.
 
-You can use it with any module system:
+
+## Install
+
+You can get it from NPM:
+
+`npm install store-x --save`
+
+Or from Bower:
+
+`bower install store-x --save`
+
+
+## Usage
+
+### You can use it with any module system
 
 - Globals:
 ```js
@@ -55,19 +69,99 @@ define(['store-x'], function (storex) {
 });
 ```
 
+### API
 
-## Install
+The `store-x`'s API is very simple. You just need to give it an object with methods. Then, you'll be able to call those methods, and listen to events when the state changes.
 
-You can get it from NPM:
+There's a method to initialize the store's state, which is the `init` method. This one is going to be executed automatically as soon as the store is created.
 
-`npm install store-x --save`
+```js
+// in this case we initialize the
+// store's state with an empty array.
+var myStore = store({
+  init: function () {
+    return [];
+  }
+});
+```
 
-Or from Bower:
+Store methods can return anything. The returned value will replace the store's state. You can even return promises and `store-x` will replace the state with the result of the promise. It works not only with jQuery promises, but with any Promises/A+ implementation.
 
-`bower install store-x --save`
+```js
+// in this case we initialize the
+// store's state with the result of
+// calling an API with jQuery.
+var myStore = store({
+  init: function () {
+    return $.ajax({
+      url: 'https://api.mysite.com/people',
+      method: 'GET'
+    });
+  }
+});
+```
+
+You can listen to events which will be fired whenever the store's state changes.
+
+```js
+var myStore = store({
+  init: function () {
+    return $.ajax({
+      url: 'https://api.mysite.com/people',
+      method: 'GET'
+    });
+  },
+  create: function (person) {
+    var state = this.state;
+    return $.ajax({
+      url: 'https://api.mysite.com/people',
+      method: 'POST',
+      data: person
+    }).then(function (person) {
+      state.push(person);
+      return state;
+    });
+  }
+});
+
+// in this case we listen to all events.
+// notice that the handler will be called
+// as soon as it's attached to the event if
+// there aren't any pending promises.
+myStore.listen(function (err, state) {
+  if (err) {
+    // handle error
+    return;
+  }
+  console.log('this is the current state', state);
+});
+
+// you can also listen to specific events.
+myStore.listen('init', function (err, state) {
+  if (err) {
+    // handle error
+    return;
+  }
+  console.log('the store was just initialized');
+});
+
+myStore.listen('create', function (err, state) {
+  if (err) {
+    // handle error
+    return;
+  }
+  console.log('a person was just created');
+});
+
+// here's how we can invoke a method.
+myStore.create({
+  first_name: 'John',
+  last_name: 'Doe'
+});
+```
 
 
-## Using it with Angular.js
+### Using it with Angular.js
 > You need to include: `store-x/dist/store-x.angular.js` or `store-x/dist/store-x.angular.min.js`
 
 ```js
@@ -115,7 +209,7 @@ myApp.controller('PeopleController', ['$scope', 'PeopleStore', function ($scope,
 ```
 
 
-## Using it with jQuery
+### Using it with jQuery
 > You need to include: `store-x/dist/store-x.js` or `store-x/dist/store-x.min.js`
 
 ```js
@@ -164,8 +258,8 @@ $(function () {
   // Execute an action
   $('.btn').click(function (event) {
     peopleStore.create({
-      first_name: 'JC',
-      last_name: 'Ivancevich'
+      first_name: 'John',
+      last_name: 'Doe'
     });
   });
 
