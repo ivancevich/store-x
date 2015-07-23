@@ -1,6 +1,6 @@
 {
   "name": "store-x",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Universal Flux Stores",
   "main": "lib/index.js",
   "scripts": {
