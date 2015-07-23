@@ -16,9 +16,10 @@ var peopleStore = storex({
     return $.get('https://api.mysite.com/people');
   },
   create: function (person) {
+    var state = this.state;
     return $.post('https://api.mysite.com/people', person).then(function (person) {
-      this.state.push(person);
-      return this.state;
+      state.push(person);
+      return state;
     });
   }
 });
@@ -28,7 +29,7 @@ peopleStore.listen(function (err, state) {
   if (err) {
     console.error('Danger danger!');
   }
-  console.log('state', state);
+  console.log(state);
 });
 
 // Listen to the `init` event
@@ -36,7 +37,7 @@ peopleStore.listen('init', function (err, state) {
   if (err) {
     console.error('Danger danger!');
   }
-  console.log('state', state);
+  console.log(state);
 });
 
 // Listen to the `create` event
@@ -44,7 +45,7 @@ peopleStore.listen('create', function (err, state) {
   if (err) {
     console.error('Danger danger!');
   }
-  console.log('state', state);
+  console.log(state);
 });
 
 // Execute an action
