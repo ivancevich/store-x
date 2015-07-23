@@ -30,14 +30,15 @@ test('should create store with init method', function (t) {
     }
   });
 
-  store.listen(function (state) {
+  store.listen(function (err, state) {
+    t.equal(err, null);
     t.deepEqual(state, data);
     t.end();
   });
 });
 
 test('should create store with custom method', function (t) {
-  t.plan(2);
+  t.plan(4);
 
   var base = 'http://localhost:3000';
   var path = '/posts';
@@ -60,7 +61,7 @@ test('should create store with custom method', function (t) {
   });
 
   var count = 0;
-  store.listen(function (state) {
+  store.listen(function (err, state) {
     var expected;
 
     switch (++count) {
@@ -72,6 +73,7 @@ test('should create store with custom method', function (t) {
         break;
     }
 
+    t.equal(err, null);
     t.deepEqual(state, expected);
   });
 
@@ -97,8 +99,9 @@ test('should fire error on ajax error', function (t) {
     }
   });
 
-  store.error(function (err) {
+  store.listen(function (err, state) {
     t.deepEqual(err, error);
+    t.equal(state, undefined);
     t.end();
   });
 });
