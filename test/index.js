@@ -81,6 +81,46 @@ test('should create store with custom method', function (t) {
 
 });
 
+test('should fire custom events', function (t) {
+  t.plan(2);
+
+  var base = 'http://localhost:3000';
+  var path = '/posts';
+  var data = {
+    id: 2,
+    title: 'Universal Flux Store',
+    author: 'JC Ivancevich'
+  };
+
+  var mock = nock(base).post(path).reply(200, data);
+
+  var store = storex({
+    init: function () {
+      return [1, 2, 3];
+    },
+    add: function (numbers) {
+      var state = this.state;
+      numbers.forEach(function (n) {
+        state.push(n);
+      });
+      return state;
+    }
+  });
+
+  store.listen('init', function (err, state) {
+    t.equal(err, null);
+    t.deepEqual(state, [1, 2, 3]);
+  });
+
+  store.listen('add', function (err, state) {
+    t.equal(err, null);
+    t.deepEqual(state, [1, 2, 3, 4, 5, 6]);
+  });
+
+  store.add([4, 5, 6]);
+
+});
+
 test('should fire error on ajax error', function (t) {
   var base = 'http://localhost:3000';
   var path = '/posts';
