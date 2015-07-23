@@ -20,7 +20,7 @@ var myStore = window.storex({
 import storex from 'store-x';
 
 var myStore = storex({
-  method: function () {
+  method () {
     return [];
   }
 });
