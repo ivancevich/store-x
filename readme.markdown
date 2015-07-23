@@ -2,13 +2,70 @@
 
 > Universal Flux Stores
 
+Simple yet powerful [Flux](http://facebook.github.io/flux/) store + dispatcher implementation. It's meant to work with any JS framework or library, and on the server as well.
+
+You can use it with any module system:
+
+- Globals:
+```js
+var myStore = window.storex({
+  method: function () {
+    return [];
+  }
+});
+```
+
+- ES6 / ES2015
+```js
+import storex from 'store-x';
+
+var myStore = storex({
+  method: function () {
+    return [];
+  }
+});
+
+export default myStore;
+```
+
+- CommonJS
+```js
+var storex = require('store-x');
+
+var myStore = storex({
+  method: function () {
+    return [];
+  }
+});
+
+module.exports = myStore;
+```
+
+- AMD
+```js
+define(['store-x'], function (storex) {
+
+  var myStore = storex({
+    method: function () {
+      return [];
+    }
+  });
+
+  return myStore;
+});
+```
+
+
 ## Install
 
 You can get it from NPM:
+
 `npm install store-x --save`
 
 Or from Bower:
+
 `bower install store-x --save`
+
 
 ## Using it with Angular.js
 > You need to include: `store-x/dist/store-x.angular.js` or `store-x/dist/store-x.angular.min.js`
@@ -56,6 +113,7 @@ myApp.controller('PeopleController', ['$scope', 'PeopleStore', function ($scope,
   }
 }]);
 ```
+
 
 ## Using it with jQuery
 > You need to include: `store-x/dist/store-x.js` or `store-x/dist/store-x.min.js`
