@@ -3,7 +3,12 @@
 > Universal Flux Stores
 
 ## Install
+
+You can get it from NPM:
 `npm install store-x --save`
+
+Or from Bower:
+`bower install store-x --save`
 
 ## Using it with Angular.js
 > You need to include: `store-x/dist/store-x.angular.js` or `store-x/dist/store-x.angular.min.js`
