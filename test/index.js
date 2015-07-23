@@ -100,10 +100,7 @@ test('should fire custom events', function (t) {
     },
     add: function (numbers) {
       var state = this.state;
-      numbers.forEach(function (n) {
-        state.push(n);
-      });
-      return state;
+      return state.concat(numbers);
     }
   });
 
