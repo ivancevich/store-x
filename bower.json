@@ -1,0 +1,28 @@
+{
+  "name": "store-x",
+  "main": "./dist/store-x.js",
+  "version": "1.0.1",
+  "homepage": "https://github.com/ivancevich/store-x",
+  "authors": [
+    "JC Ivancevich <jc.ivancevich@gmail.com>"
+  ],
+  "description": "Universal Flux Stores",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "universal",
+    "flux",
+    "store"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
