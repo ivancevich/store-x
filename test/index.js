@@ -142,3 +142,25 @@ test('should fire error on ajax error', function (t) {
     t.end();
   });
 });
+
+test('should return the same as the state', function (t) {
+  t.plan(3);
+
+  var _state = {
+    foo: 'bar'
+  };
+
+  var store = storex({
+    foo: function () {
+      return _state;
+    }
+  });
+
+  store.listen('foo', function (err, state) {
+    t.equal(err, null);
+    t.deepEqual(state, _state);
+  });
+
+  var result = store.foo();
+  t.equal(result, _state);
+});
