@@ -2,23 +2,23 @@
   "name": "store-x",
   "version": "1.0.1",
   "description": "Universal Flux Stores",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "bundle": "rm -rf dist && mkdir -p dist && browserify index.js --standalone storex -t babelify -o dist/store-x.js && uglifyjs dist/store-x.js -m -c -o dist/store-x.min.js",
+    "bundle": "build/bundle",
     "test": "tape test/**/*.js"
   },
   "author": "JC Ivancevich <jc.ivancevich@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^3.10.0"
+    "lodash": "~3.10.0"
   },
   "devDependencies": {
-    "axios": "^0.5.4",
-    "babel": "^5.8.3",
-    "babelify": "^6.1.3",
-    "browserify": "^11.0.0",
-    "nock": "^2.9.1",
-    "tape": "^4.0.1",
-    "uglify-js": "^2.4.24"
+    "axios": "~0.5.0",
+    "babel": "~5.8.0",
+    "babelify": "~6.1.0",
+    "browserify": "~11.0.0",
+    "nock": "~2.9.0",
+    "tape": "~4.0.0",
+    "uglify-js": "~2.4.0"
   }
 }

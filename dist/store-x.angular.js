@@ -1,4 +1,24 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.storex = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+'use strict';
+
+var angular = global.angular || require('angular');
+var storex = require('./');
+
+var _module = angular.module('storex', []);
+
+_module.provider('storex', StorexProvider);
+
+function StorexProvider() {
+  this.$get = function StorexFactory() {
+    return storex;
+  };
+}
+
+_module.exports = angular;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./":3,"angular":"angular"}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -60,7 +80,7 @@ var Emitter = (function (_EventEmitter) {
 exports['default'] = Emitter;
 module.exports = exports['default'];
 
-},{"./util":4,"events":5}],2:[function(require,module,exports){
+},{"./util":5,"events":6}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -80,7 +100,7 @@ function storex(methods) {
 exports['default'] = storex;
 module.exports = exports['default'];
 
-},{"./store":3}],3:[function(require,module,exports){
+},{"./store":4}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -208,7 +228,7 @@ var Store = (function (_Emitter) {
 exports['default'] = Store;
 module.exports = exports['default'];
 
-},{"./emitter":1,"./util":4}],4:[function(require,module,exports){
+},{"./emitter":2,"./util":5}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -239,7 +259,7 @@ function isPromise(obj) {
 function noop() {}
 module.exports = exports['default'];
 
-},{"lodash/lang/cloneDeep":28}],5:[function(require,module,exports){
+},{"lodash/lang/cloneDeep":29}],6:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -542,7 +562,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * Copies the values of `source` to `array`.
  *
@@ -564,7 +584,7 @@ function arrayCopy(source, array) {
 
 module.exports = arrayCopy;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * A specialized version of `_.forEach` for arrays without support for callback
  * shorthands and `this` binding.
@@ -588,7 +608,7 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var baseCopy = require('./baseCopy'),
     keys = require('../object/keys');
 
@@ -609,7 +629,7 @@ function baseAssign(object, source) {
 
 module.exports = baseAssign;
 
-},{"../object/keys":34,"./baseCopy":10}],9:[function(require,module,exports){
+},{"../object/keys":35,"./baseCopy":11}],10:[function(require,module,exports){
 var arrayCopy = require('./arrayCopy'),
     arrayEach = require('./arrayEach'),
     baseAssign = require('./baseAssign'),
@@ -739,7 +759,7 @@ function baseClone(value, isDeep, customizer, key, object, stackA, stackB) {
 
 module.exports = baseClone;
 
-},{"../lang/isArray":30,"../lang/isObject":33,"./arrayCopy":6,"./arrayEach":7,"./baseAssign":8,"./baseForOwn":12,"./initCloneArray":19,"./initCloneByTag":20,"./initCloneObject":21}],10:[function(require,module,exports){
+},{"../lang/isArray":31,"../lang/isObject":34,"./arrayCopy":7,"./arrayEach":8,"./baseAssign":9,"./baseForOwn":13,"./initCloneArray":20,"./initCloneByTag":21,"./initCloneObject":22}],11:[function(require,module,exports){
 /**
  * Copies properties of `source` to `object`.
  *
@@ -764,7 +784,7 @@ function baseCopy(source, props, object) {
 
 module.exports = baseCopy;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var createBaseFor = require('./createBaseFor');
 
 /**
@@ -783,7 +803,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./createBaseFor":16}],12:[function(require,module,exports){
+},{"./createBaseFor":17}],13:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keys = require('../object/keys');
 
@@ -802,7 +822,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"../object/keys":34,"./baseFor":11}],13:[function(require,module,exports){
+},{"../object/keys":35,"./baseFor":12}],14:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -818,7 +838,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 /**
@@ -859,7 +879,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"../utility/identity":36}],15:[function(require,module,exports){
+},{"../utility/identity":37}],16:[function(require,module,exports){
 (function (global){
 /** Native method references. */
 var ArrayBuffer = global.ArrayBuffer,
@@ -883,7 +903,7 @@ function bufferClone(buffer) {
 module.exports = bufferClone;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -912,7 +932,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{"./toObject":27}],17:[function(require,module,exports){
+},{"./toObject":28}],18:[function(require,module,exports){
 var baseProperty = require('./baseProperty');
 
 /**
@@ -929,7 +949,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"./baseProperty":13}],18:[function(require,module,exports){
+},{"./baseProperty":14}],19:[function(require,module,exports){
 var isNative = require('../lang/isNative');
 
 /**
@@ -947,7 +967,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"../lang/isNative":32}],19:[function(require,module,exports){
+},{"../lang/isNative":33}],20:[function(require,module,exports){
 /** Used for native method references. */
 var objectProto = Object.prototype;
 
@@ -975,7 +995,7 @@ function initCloneArray(array) {
 
 module.exports = initCloneArray;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var bufferClone = require('./bufferClone');
 
 /** `Object#toString` result references. */
@@ -1040,7 +1060,7 @@ function initCloneByTag(object, tag, isDeep) {
 
 module.exports = initCloneByTag;
 
-},{"./bufferClone":15}],21:[function(require,module,exports){
+},{"./bufferClone":16}],22:[function(require,module,exports){
 /**
  * Initializes an object clone.
  *
@@ -1058,7 +1078,7 @@ function initCloneObject(object) {
 
 module.exports = initCloneObject;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength');
 
@@ -1075,7 +1095,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./getLength":17,"./isLength":24}],23:[function(require,module,exports){
+},{"./getLength":18,"./isLength":25}],24:[function(require,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -1101,7 +1121,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -1123,7 +1143,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -1137,7 +1157,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('./isIndex'),
@@ -1180,7 +1200,7 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"../lang/isArguments":29,"../lang/isArray":30,"../object/keysIn":35,"./isIndex":23,"./isLength":24}],27:[function(require,module,exports){
+},{"../lang/isArguments":30,"../lang/isArray":31,"../object/keysIn":36,"./isIndex":24,"./isLength":25}],28:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -1196,7 +1216,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"../lang/isObject":33}],28:[function(require,module,exports){
+},{"../lang/isObject":34}],29:[function(require,module,exports){
 var baseClone = require('../internal/baseClone'),
     bindCallback = require('../internal/bindCallback');
 
@@ -1253,7 +1273,7 @@ function cloneDeep(value, customizer, thisArg) {
 
 module.exports = cloneDeep;
 
-},{"../internal/baseClone":9,"../internal/bindCallback":14}],29:[function(require,module,exports){
+},{"../internal/baseClone":10,"../internal/bindCallback":15}],30:[function(require,module,exports){
 var isArrayLike = require('../internal/isArrayLike'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -1289,7 +1309,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"../internal/isArrayLike":22,"../internal/isObjectLike":25}],30:[function(require,module,exports){
+},{"../internal/isArrayLike":23,"../internal/isObjectLike":26}],31:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
@@ -1331,7 +1351,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internal/getNative":18,"../internal/isLength":24,"../internal/isObjectLike":25}],31:[function(require,module,exports){
+},{"../internal/getNative":19,"../internal/isLength":25,"../internal/isObjectLike":26}],32:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** `Object#toString` result references. */
@@ -1371,7 +1391,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./isObject":33}],32:[function(require,module,exports){
+},{"./isObject":34}],33:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -1421,7 +1441,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"../internal/isObjectLike":25,"./isFunction":31}],33:[function(require,module,exports){
+},{"../internal/isObjectLike":26,"./isFunction":32}],34:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -1451,7 +1471,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isArrayLike = require('../internal/isArrayLike'),
     isObject = require('../lang/isObject'),
@@ -1498,7 +1518,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internal/getNative":18,"../internal/isArrayLike":22,"../internal/shimKeys":26,"../lang/isObject":33}],35:[function(require,module,exports){
+},{"../internal/getNative":19,"../internal/isArrayLike":23,"../internal/shimKeys":27,"../lang/isObject":34}],36:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('../internal/isIndex'),
@@ -1564,7 +1584,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"../internal/isIndex":23,"../internal/isLength":24,"../lang/isArguments":29,"../lang/isArray":30,"../lang/isObject":33}],36:[function(require,module,exports){
+},{"../internal/isIndex":24,"../internal/isLength":25,"../lang/isArguments":30,"../lang/isArray":31,"../lang/isObject":34}],37:[function(require,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -1586,5 +1606,4 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}]},{},[2])(2)
-});
+},{}]},{},[1]);
