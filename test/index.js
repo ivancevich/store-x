@@ -143,8 +143,8 @@ test('should fire error on ajax error', function (t) {
   });
 });
 
-test('should return the same as the state', function (t) {
-  t.plan(3);
+test('should make store methods return its result', function (t) {
+  t.plan(4);
 
   var _state = {
     foo: 'bar'
@@ -162,5 +162,42 @@ test('should return the same as the state', function (t) {
   });
 
   var result = store.foo();
-  t.equal(result, _state);
+  t.deepEqual(result, _state);
+
+  // changing the result should not mutate the state
+  result.foo = 'baz';
+  t.notDeepEqual(store.state, result);
+});
+
+test('should make store methods return its result as promise', function (t) {
+  t.plan(4);
+  var base = 'http://localhost:3000';
+  var path = '/posts';
+  var data = [{
+    id: 1,
+    title: 'First blog post',
+    author: 'JC Ivancevich'
+  }];
+
+  var mock = nock(base).get(path).reply(200, data);
+
+  var store = storex({
+    fooPromise: function () {
+      return request.get(base + path).then(function (result) {
+        return result.data;
+      });
+    }
+  });
+
+  store.listen('fooPromise', function (err, state) {
+    t.equal(err, null);
+    t.deepEqual(state, data);
+  });
+
+  var promise = store.fooPromise();
+  promise.then(function (result) {
+    t.deepEqual(result, data);
+    result[0].foo = 'bar';
+    t.notDeepEqual(store.state, result);
+  });
 });
