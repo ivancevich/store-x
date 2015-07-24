@@ -5,9 +5,9 @@ rm -rf dist &&
 mkdir -p dist &&
 
 # bundle regular script
-browserify lib/index.js --standalone storex -t babelify -o dist/store-x.js &&
-NODE_ENV=production browserify lib/index.js --standalone storex -t babelify | uglifyjs -m -c > dist/store-x.min.js &&
+browserify lib/index.js --standalone storex -t babelify > dist/store-x.js &&
+cat dist/store-x.js | uglifyjs -m -c > dist/store-x.min.js &&
 
 # bundle angular script
-browserify lib/angular.js --external angular -t babelify -o dist/store-x.angular.js &&
-NODE_ENV=production browserify lib/angular.js --external angular -t babelify | uglifyjs -m -c > dist/store-x.angular.min.js
+browserify lib/angular.js --external angular -t babelify > dist/store-x.angular.js &&
+cat dist/store-x.angular.js | uglifyjs -m -c > dist/store-x.angular.min.js
