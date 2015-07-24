@@ -190,6 +190,7 @@ var Store = (function (_Emitter) {
 
       var result = (_util$wrapName = this[_util2['default'].wrapName(method)]).call.apply(_util$wrapName, [context].concat(args));
       this._handleResult(method, result);
+      return result;
     }
   }, {
     key: '_handleResult',
