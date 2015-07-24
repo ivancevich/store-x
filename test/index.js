@@ -197,6 +197,8 @@ test('should make store methods return its result as promise', function (t) {
   var promise = store.fooPromise();
   promise.then(function (result) {
     t.deepEqual(result, data);
+
+    // changing the result should not mutate the state
     result[0].foo = 'bar';
     t.notDeepEqual(store.state, result);
   });
