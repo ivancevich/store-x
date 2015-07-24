@@ -1,6 +1,6 @@
 {
   "name": "store-x",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Universal Flux Stores",
   "main": "lib/index.js",
   "scripts": {
@@ -8,6 +8,12 @@
     "test": "tape test/**/*.js"
   },
   "author": "JC Ivancevich <jc.ivancevich@gmail.com>",
+  "keywords": [
+    "universal",
+    "flux",
+    "store",
+    "angular"
+  ],
   "license": "MIT",
   "dependencies": {
     "lodash": "~3.10.0"
