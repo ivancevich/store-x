@@ -5,9 +5,9 @@
 var angular = global.angular || require('angular');
 var storex = require('./');
 
-var _module = angular.module('storex', []);
+var ngModule = angular.module('storex', []);
 
-_module.provider('storex', StorexProvider);
+ngModule.provider('storex', StorexProvider);
 
 function StorexProvider() {
   this.$get = function StorexFactory() {
@@ -15,7 +15,7 @@ function StorexProvider() {
   };
 }
 
-_module.exports = angular;
+module.exports = angular;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./":3,"angular":"angular"}],2:[function(require,module,exports){
