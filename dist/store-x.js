@@ -115,20 +115,23 @@ var Store = (function (_Emitter) {
 
     _get(Object.getPrototypeOf(Store.prototype), 'constructor', this).call(this);
 
-    this._pendingPromises = 0;
+    if (typeof methods !== 'object') {
+      throw new Error('the store needs an object with methods');
+    }
 
-    var keys = Object.keys(methods);
+    var keys = Object.keys(methods).filter(function (key) {
+      return typeof methods[key] === 'function';
+    });
     if (keys.length === 0) {
       throw new Error('the store needs at least 1 method');
     }
 
-    keys.filter(function (key) {
-      return typeof methods[key] === 'function';
-    }).forEach(function (key) {
+    keys.forEach(function (key) {
       _this[key] = _this._method.bind(_this, key);
       _this[_util2['default'].wrapName(key)] = methods[key];
     });
 
+    this._pendingPromises = 0;
     this._init();
   }
 
@@ -185,14 +188,14 @@ var Store = (function (_Emitter) {
         return;
       }
 
-      this._pendingPromises = this._pendingPromises + 1;
+      this._pendingPromises += 1;
 
       result.then(function (result) {
-        _this2._pendingPromises = _this2._pendingPromises - 1;
+        _this2._pendingPromises += -1;
         _this2._state = _util2['default'].clone(result);
         _this2.emit(method, null, _this2.state);
       }, function (err) {
-        _this2._pendingPromises = _this2._pendingPromises - 1;
+        _this2._pendingPromises += -1;
         _this2.emit(method, err);
       });
     }
