@@ -178,7 +178,7 @@ var Store = (function (_Emitter) {
       var _this2 = this;
 
       if (!_util2['default'].isPromise(result)) {
-        this._state = result || [];
+        this._state = _util2['default'].clone(result || []);
         if (this._pendingPromises === 0) {
           this.emit(method, null, this.state);
         }
@@ -189,7 +189,7 @@ var Store = (function (_Emitter) {
 
       result.then(function (result) {
         _this2._pendingPromises = _this2._pendingPromises - 1;
-        _this2._state = result;
+        _this2._state = _util2['default'].clone(result);
         _this2.emit(method, null, _this2.state);
       }, function (err) {
         _this2._pendingPromises = _this2._pendingPromises - 1;
