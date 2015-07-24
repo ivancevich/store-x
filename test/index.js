@@ -7,7 +7,21 @@ var request = require('axios');
 var storex = require('../');
 
 test('should not create an empty store', function (t) {
-  t.throws(storex, 'The Store needs at least 1 method');
+  var params = [
+    undefined,
+    null,
+    [],
+    [1, 'foo'],
+    {},
+    { foo: 'bar' },
+    function () { return true; }
+  ];
+
+  params.forEach(function (param) {
+    var factory = storex.bind(storex, param);
+    t.throws(factory);
+  });
+
   t.end();
 });
 
