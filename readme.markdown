@@ -2,6 +2,8 @@
 
 > Universal Flux Stores
 
+[![Build Status](https://travis-ci.org/ivancevich/store-x.svg?branch=master)](https://travis-ci.org/ivancevich/store-x)
+
 Simple yet powerful [Flux](http://facebook.github.io/flux/) stores implementation. It's meant to work with any JS framework or library, and on the server as well.
 
 
